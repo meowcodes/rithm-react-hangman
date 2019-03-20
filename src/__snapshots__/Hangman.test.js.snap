@@ -14,6 +14,7 @@ exports[`matches snapshot 1`] = `
     ]
   }
   maxWrong={6}
+  nWrong={0}
 >
   <div
     className="Hangman"
@@ -21,6 +22,12 @@ exports[`matches snapshot 1`] = `
     <img
       src="0.jpg"
     />
+    <p
+      className="wrong-guesses"
+    >
+      Number wrong: 
+      0
+    </p>
     <p
       className="Hangman-word"
     >

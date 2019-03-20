@@ -12,6 +12,7 @@ class Hangman extends Component {
   /** by default, allow 6 guesses and use provided gallows images. */
   static defaultProps = {
     maxWrong: 6,
+    nWrong: 0,
     images: [img0, img1, img2, img3, img4, img5, img6]
   };
 
@@ -61,6 +62,7 @@ class Hangman extends Component {
     return (
       <div className="Hangman">
         <img src={this.props.images[this.state.nWrong]} />
+        <p className="wrong-guesses">Number wrong: {this.state.nWrong}</p>
         <p className="Hangman-word">{this.guessedWord()}</p>
         <p>{this.generateButtons()}</p>
       </div>
