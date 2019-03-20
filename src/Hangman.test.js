@@ -63,6 +63,47 @@ it("removes image if out of wrong guesses", function() {
   expect(imageSrc).toEqual(undefined);
 });
 
+// functionality test - out of wrong guess, stops responding
+it("stops responding if out of wrong guesses", function() {
+  let wrapper = mount(<Hangman />);
+  
+  wrapper
+    .find("button[value='b']")
+    .simulate("click", { target: { value: "b" } });
+  
+  wrapper
+    .find("button[value='x']")
+    .simulate("click", { target: { value: "x" } });
+  
+  wrapper
+    .find("button[value='w']")
+    .simulate("click", { target: { value: "w" } });
+  
+  wrapper
+    .find("button[value='d']")
+    .simulate("click", { target: { value: "d" } });
+  
+  wrapper
+    .find("button[value='k']")
+    .simulate("click", { target: { value: "k" } });
+  wrapper
+    .find("button[value='z']")
+    .simulate("click", { target: { value: "z" } });
+  wrapper
+    .find("button[value='m']")
+    .simulate("click", { target: { value: "m" } });
+  wrapper
+    .find("button[value='a']")
+    .simulate("click", { target: { value: "a" } });
+  
+  // Hangman-word should NOT change
+  let hangmanWord = wrapper.find('p.Hangman-word').first().text()
+  expect(hangmanWord).toEqual('_____');
+  // keyboard should NOT change
+  // let bBtn = wrapper.find("button[value='a']").html()
+  // expect(bBtn.matchesElement(<button key="a" value="a" disabled={false}>a</button>));
+});
+
 // word test - wrong guess
 it("does not change hangman-word if wrong letter guessed", function() {
   let wrapper = mount(<Hangman />);
