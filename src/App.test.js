@@ -1,9 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount } from "enzyme";
+import toJson from "enzyme-to-json";
 import App from './App';
 
+// smoke test
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  mount(<App />);
+});
+
+// snapshot test
+it("matches snapshot", function() {
+  let wrapper = mount(<App />);
+  let serialized = toJson(wrapper);
+  expect(serialized).toMatchSnapshot();
 });
