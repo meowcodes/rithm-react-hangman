@@ -92,16 +92,17 @@ it("stops responding if out of wrong guesses", function() {
   wrapper
     .find("button[value='m']")
     .simulate("click", { target: { value: "m" } });
-  wrapper
-    .find("button[value='a']")
-    .simulate("click", { target: { value: "a" } });
   
-  // Hangman-word should NOT change
+  // Hangman-word shows correct word
   let hangmanWord = wrapper.find('p.Hangman-word').first().text()
-  expect(hangmanWord).toEqual('_____');
-  // keyboard should NOT change
-  // let bBtn = wrapper.find("button[value='a']").html()
-  // expect(bBtn.matchesElement(<button key="a" value="a" disabled={false}>a</button>));
+  expect(hangmanWord).toEqual('apple');
+  // Shows 'you lose'
+  expect(wrapper.html()).toContain('You lose!')
+  // nWrong does not go above 7
+  expect(wrapper.state().nWrong).toEqual(7)
+  // Should hide button area
+  let playbox = wrapper.find("p.Hangman-playbox").text();
+  expect(playbox).toEqual('You lose!');
 });
 
 // word test - wrong guess
@@ -178,8 +179,8 @@ it("changes <p> Number wrong: </p> if wrong letter guessed", function() {
     .simulate("click", { target: { value: "b" } });
   
   // Number wrong should change
-  let hangmanWord = wrapper.find('p.wrong-guesses').first();
-  expect(hangmanWord.matchesElement(<p class="wrong-guesses">Number wrong: 1</p>));
+  let hangmanWord = wrapper.find('p.Hangman-wrong-guesses').first();
+  expect(hangmanWord.matchesElement(<p class="Hangman-wrong-guesses">Number wrong: 1</p>));
 });
 
 // testing nWrong w/ correct letter
@@ -191,6 +192,6 @@ it("doesn't change <p> Number wrong: </p> if correct letter guessed", function()
     .simulate("click", { target: { value: "a" } });
   
   // Number wrong should not change
-  let hangmanWord = wrapper.find('p.wrong-guesses').first();
-  expect(hangmanWord.matchesElement(<p class="wrong-guesses">Number wrong: 0</p>));
+  let hangmanWord = wrapper.find('p.Hangman-wrong-guesses').first();
+  expect(hangmanWord.matchesElement(<p class="Hangman-wrong-guesses">Number wrong: 0</p>));
 });

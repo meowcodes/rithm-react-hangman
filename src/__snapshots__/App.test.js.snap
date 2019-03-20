@@ -27,7 +27,7 @@ exports[`matches snapshot 1`] = `
           src="0.jpg"
         />
         <p
-          className="wrong-guesses"
+          className="Hangman-wrong-guesses"
         >
           Number wrong: 
           0
@@ -41,7 +41,9 @@ exports[`matches snapshot 1`] = `
           _
           _
         </p>
-        <p>
+        <p
+          className="Hangman-playbox"
+        >
           <button
             disabled={false}
             key="a"
